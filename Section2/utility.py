@@ -38,15 +38,15 @@ def get_transformed_data():
 	Z_train = (Z_train - Z_train.mean(axis = 0)) / Z_train.std(axis = 0)
 	Z_test = (Z_test - Z_test.mean(axis = 0)) / Z_test.std(axis = 0)
 	
-	return Z_train, Z_test, Y_train, Y_train, Y_test
+	return Z_train, Z_test, Y_train, Y_test
 	
 def y2indicator(y):
 	N = len(y)
 	K = len(set(y))
+	y = y.astype(np.int32)
 	T = np.zeros((N, K))
 	for x in range(N):
-		T[N, y[x]] = 1
-	
+		T[x, y[x]] = 1
 	return T
 
 def gradW(X, pY, T):
